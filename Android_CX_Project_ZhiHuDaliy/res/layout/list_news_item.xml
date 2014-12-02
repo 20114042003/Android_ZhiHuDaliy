@@ -17,7 +17,7 @@
         android:textSize="18sp"
         tools:ignore="RtlHardcoded" />
 
-    <com.loopj.android.image.SmartImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/img_thumb"
         android:layout_width="80dp"
         android:layout_height="80dp"

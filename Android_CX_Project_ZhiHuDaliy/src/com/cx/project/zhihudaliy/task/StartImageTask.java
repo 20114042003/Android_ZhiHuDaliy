@@ -14,7 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-
+@Deprecated
 public class StartImageTask extends AsyncTask<Void, Void, Bitmap> implements AnimationListener {
 	private Context context;
 	private ImageView imgStart;

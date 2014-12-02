@@ -1,9 +1,12 @@
 package com.cx.project.zhihudaliy.adapter;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.cx.project.zhihudaliy.R;
+import com.cx.project.zhihudaliy.cache.BitmapCache;
 import com.cx.project.zhihudaliy.entity.Latest;
 import com.cx.project.zhihudaliy.entity.Story;
-import com.loopj.android.image.SmartImageView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,12 +18,15 @@ import android.widget.TextView;
 public class CustomListViewAdapter extends BaseAdapter{
 	private Context context;
 	private Latest latest;
+	private RequestQueue mQueue;
+	
 	private ViewHolder viewHolder;
 	
 	
-	public CustomListViewAdapter(Context context,Latest latest) {
+	public CustomListViewAdapter(Context context,Latest latest,RequestQueue mQueue) {
 		this.context = context;
 		this.latest = latest;
+		this.mQueue= mQueue;
 	}
 
 	@Override
@@ -45,7 +51,7 @@ public class CustomListViewAdapter extends BaseAdapter{
 			
 			viewHolder = new ViewHolder();
 			viewHolder.txTitle = (TextView) convertView.findViewById(R.id.tx_title);
-			viewHolder.imgThumb = (SmartImageView) convertView.findViewById(R.id.img_thumb);
+			viewHolder.imgThumb = (NetworkImageView) convertView.findViewById(R.id.img_thumb);
 			
 			convertView.setTag(viewHolder);
 		} else {
@@ -54,16 +60,14 @@ public class CustomListViewAdapter extends BaseAdapter{
 		
 		Story story = latest.getStories().get(position);
 		viewHolder.txTitle.setText(story.getTitle());
-		viewHolder.imgThumb.setImageUrl(story.getImages().get(0));
+		viewHolder.imgThumb.setImageUrl(story.getImages().get(0), new ImageLoader(mQueue, new BitmapCache()));
 		
 		return convertView;
 	}
 	
-	
-	
 	class ViewHolder {
 		public TextView txTitle;
-		public SmartImageView imgThumb;
+		public NetworkImageView imgThumb;
 	}
 	
 }

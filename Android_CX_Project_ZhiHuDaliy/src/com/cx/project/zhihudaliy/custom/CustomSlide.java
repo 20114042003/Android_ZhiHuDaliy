@@ -6,19 +6,15 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.cx.project.zhihudaliy.R;
+import com.cx.project.zhihudaliy.cache.BitmapCache;
 import com.cx.project.zhihudaliy.entity.Latest;
-import com.cx.project.zhihudaliy.entity.Story;
 import com.cx.project.zhihudaliy.entity.TopStory;
-import com.cx.project.zhihudaliy.util.NetUtil;
-import com.loopj.android.image.SmartImageView;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -39,10 +35,11 @@ public class CustomSlide extends FrameLayout implements OnPageChangeListener{
 	private ViewPager vpSlide;  //viewpager  
 	private LinearLayout dotsGroup; //viewpager 中的点布局
 	private TextView txTitle;  //viewpager 中的标题
-	private List<SmartImageView> imageViews; //存viewpager 中的图
+	private List<NetworkImageView> imageViews; //存viewpager 中的图
+	
 	
 	//数据相关
-	Latest latest = null;
+	private Latest latest = null;
 
 	public CustomSlide(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -82,6 +79,7 @@ public class CustomSlide extends FrameLayout implements OnPageChangeListener{
 	
 	private int item; // ViewPager的Postion
 	private Handler pageChangeHandler = new Handler() {
+		@SuppressLint("HandlerLeak")
 		@Override
 		public void handleMessage(Message msg) {
 			vpSlide.setCurrentItem(item);
@@ -100,16 +98,17 @@ public class CustomSlide extends FrameLayout implements OnPageChangeListener{
 	 * 初始化 幻灯
 	 * @param latest 外面提供
 	 */
-	public void initSlide(Latest latest) {
+	public void initSlide(Latest latest,RequestQueue mQueue) {
 		this.latest = latest;
+		
 		// 初始化ImageViews
-		imageViews = new ArrayList<SmartImageView>();
+		imageViews = new ArrayList<NetworkImageView>();
 		for (int i = 0 ; i < latest.getTopStories().size() ; i++) {
 			TopStory topStory = latest.getTopStories().get(i);
-			SmartImageView smartImageView = new SmartImageView(context);
-			smartImageView.setScaleType(ScaleType.CENTER_CROP);
-			smartImageView.setImageUrl(topStory.getImage());
-			imageViews.add(smartImageView);
+			NetworkImageView networkImageView = new NetworkImageView(context);
+			networkImageView.setScaleType(ScaleType.CENTER_CROP);
+			networkImageView.setImageUrl(topStory.getImage(), new ImageLoader(mQueue, new BitmapCache()));
+			imageViews.add(networkImageView);
 		}
 			
 		// ViewPager赋值

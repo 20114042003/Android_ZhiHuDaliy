@@ -16,6 +16,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -90,6 +94,23 @@ public class NetUtil {
 		}
 		
 		return httpEntity;
+	}
+	
+	
+	/**
+	 * 使用Volle得到Json 字符串
+	 * @param context 为getApplicationContext()得到的。
+	 * @param url  网络地址
+	 * @return
+	 */
+	public String getJsonByVolley(Context context,String url){
+		String json=null;
+		
+		RequestQueue mQueue;
+		mQueue =Volley.newRequestQueue(context);
+	
+		
+		return json;
 	}
 	
 	
