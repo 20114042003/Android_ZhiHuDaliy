@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.cx.project.zhihudaliy.entity.Latest;
+import com.cx.project.zhihudaliy.entity.News;
 import com.cx.project.zhihudaliy.entity.Story;
 import com.cx.project.zhihudaliy.entity.TopStory;
 import com.cx.project.zhihudaliy.util.NetUtil;
@@ -17,7 +17,7 @@ import android.os.AsyncTask;
 public class LatestTask extends AsyncTask<String, Void, Void>{
 	
 	private LatestCallBack latestIml;
-	private Latest latest = null;
+	private News latest = null;
 	
 	
 
@@ -31,7 +31,7 @@ public class LatestTask extends AsyncTask<String, Void, Void>{
 			String json = NetUtil.getJson(params[0]);
 			if (json != null) {
 				JSONObject latestObject = new JSONObject(json);
-				latest = new Latest();
+				latest = new News();
 				//½âÎölatest
 				parserLatest(latestObject);
 			}
@@ -50,7 +50,7 @@ public class LatestTask extends AsyncTask<String, Void, Void>{
 	
 	
 	public interface LatestCallBack{
-		void onPostExecute(Latest latest);
+		void onPostExecute(News latest);
 	}
 	
 	
