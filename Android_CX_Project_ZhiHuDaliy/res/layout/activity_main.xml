@@ -9,10 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp" />
 
-    <ScrollView
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/sv_latest" >
+        android:id="@+id/sv_latest"
+         ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both"  >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,6 +42,6 @@
                 android:dividerHeight="5dp"
                 android:padding="10dp" />
         </LinearLayout>
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
 </LinearLayout>

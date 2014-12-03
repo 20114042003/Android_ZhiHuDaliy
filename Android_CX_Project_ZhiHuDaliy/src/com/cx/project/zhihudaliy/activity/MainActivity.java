@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ScrollView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -25,20 +24,21 @@ import com.cx.project.zhihudaliy.custom.CustomTitle;
 import com.cx.project.zhihudaliy.entity.Latest;
 import com.cx.project.zhihudaliy.entity.Story;
 import com.cx.project.zhihudaliy.entity.TopStory;
-import com.cx.project.zhihudaliy.task.LatestTask;
-import com.cx.project.zhihudaliy.task.LatestTask.LatestCallBack;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 public class MainActivity extends Activity {
 	private CustomTitle cTitle;
 	private CustomSlide cSlide;
 	private CustomListViewForScrollView cLvNews;
-	private ScrollView svLaTest;
+	private PullToRefreshScrollView svLaTest;
 	
 	//Volley相关
 	private RequestQueue mQueue;
 	
 	//数据相关
 	private Latest latest;
+	
+	private PullToRefreshScrollView ptsSv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
 	 * 初始化 存Slide 和ListView的  ScrollView
 	 */
 	private void initsvLatest() {
-		svLaTest = (ScrollView) findViewById(R.id.sv_latest);
+		svLaTest = (PullToRefreshScrollView) findViewById(R.id.sv_latest);
 	}
 	
 	/**
@@ -84,25 +84,6 @@ public class MainActivity extends Activity {
 	private void initSlide() {
 		
 		cSlide =(CustomSlide) findViewById(R.id.custom_slide);
-		
-		
-		LatestTask task =new LatestTask(new LatestCallBack() {
-			/**
-			 * 接口回调 处理 Latest类
-			 */
-			@Override
-			public void onPostExecute(Latest latest) { 
-				
-				//初始化 幻灯
-				cSlide.initSlide(latest,mQueue);
-				//初始化listView
-				CustomListViewAdapter adapter =new CustomListViewAdapter(MainActivity.this, latest,mQueue);
-				cLvNews.setAdapter(adapter);
-				
-				svLaTest.smoothScrollTo(0, 0);
-			}
-		});
-		task.execute(API.getLatestUrl());
 	}
 
 
@@ -129,7 +110,8 @@ public class MainActivity extends Activity {
 					CustomListViewAdapter adapter =new CustomListViewAdapter(MainActivity.this, latest,mQueue);
 					cLvNews.setAdapter(adapter);
 					
-					svLaTest.smoothScrollTo(0, 0);
+					//ScrollView 到顶部
+//					svLaTest.smoothScrollTo(0, 0);
 					
 				} catch (JSONException e) {
 					e.printStackTrace();

@@ -103,15 +103,15 @@ public class NetUtil {
 	 * @param url  ÍøÂçµØÖ·
 	 * @return
 	 */
-	public String getJsonByVolley(Context context,String url){
-		String json=null;
-		
-		RequestQueue mQueue;
-		mQueue =Volley.newRequestQueue(context);
-	
-		
-		return json;
-	}
+//	public String getJsonByVolley(Context context,String url){
+//		String json=null;
+//		
+//		RequestQueue mQueue;
+//		mQueue =Volley.newRequestQueue(context);
+//	
+//		
+//		return json;
+//	}
 	
 	
 	
