@@ -28,7 +28,6 @@ import com.cx.project.zhihudaliy.entity.TopStory;
 import com.cx.project.zhihudaliy.util.date.DateStyle;
 import com.cx.project.zhihudaliy.util.date.DateUtil;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
@@ -44,7 +43,6 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 	//数据相关
 	private News news;
 	private CustomListViewAdapter adapter;
-	private PullToRefreshScrollView ptsSv;
 	private boolean up ;
 
 	@Override
@@ -63,21 +61,18 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 
 	
 	/**
-	 * 初始化存热点新闻的ListView
+	 * 绑定 新闻列表
 	 */
 	private void initLvNews() {
 		cLvNews = (CustomListViewForScrollView) findViewById(R.id.lv_news);
-		
-		
 	}
-
+	
 	/**
 	 * 初始化标题
 	 */
 	private void initTitle() {
 		cTitle =(CustomTitle) findViewById(R.id.custom_title);
 		cTitle.setTitle("首页");
-		
 	}
 	
 	/**
@@ -85,18 +80,16 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 	 */
 	private void initsvLatest() {
 		svLaTest = (PullToRefreshScrollView) findViewById(R.id.sv_latest);
-		svLaTest.setOnRefreshListener(this);
+		svLaTest.setOnRefreshListener(this); //监听上下拉
 	}
 	
 	/**
-	 * 初始化 幻灯
+	 * 绑定 新闻幻灯（组合控件）
 	 */
 	private void initSlide() {
-		
 		cSlide =(CustomSlide) findViewById(R.id.custom_slide);
 	}
-
-
+	
 	/**
 	 * 初始化 新闻幻灯 和 新闻列表 的数据
 	 */
@@ -106,41 +99,8 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		mQueue.add( new JsonObjectRequest(Method.GET, API.getLatestUrl(), null, this, null));
 		
 	}
-
-
-
-
-	/*---------------监听PullToRefreshScrollView上下拉---------------*/
-	/**
-	 *  下拉刷新。
-	 */
-	@Override
-	public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-		//清空数据
-		cSlide.cancel();
-		news.getStories().clear();
-		news.getTopStories().clear();
-		//重新加载数据
-		initLatestData();
-		
-		
-	}
-
-	/**
-	 * 上拉加载
-	 */
-	@Override
-	public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-		//该地址加载数据,昨天的新闻（用今天的data）。
-		up=true;
-		mQueue.add( new JsonObjectRequest(Method.GET,String.format(API.getBeforeUrl(),news.getDate() ) , null, this, null));
-		
-	}
-	/*---------------监听PullToRefreshScrollView上下拉---------------*/
-
-
 	
-	/*------------------初始化新闻数据------------------*/
+	/*------------------解析Json数据,并赋值------------------*/
 	@Override
 	public void onResponse(JSONObject response) {
 		try {
@@ -178,6 +138,41 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		}
 	}
 	
+	/*------------------解析Json数据,并赋值------------------*/
+	
+
+	/*---------------监听PullToRefreshScrollView上下拉---------------*/
+	/**
+	 *  下拉刷新。
+	 */
+	@Override
+	public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+		//清空数据
+		cSlide.cancel();
+		news.getStories().clear();
+		news.getTopStories().clear();
+		//重新加载数据
+		initLatestData();
+		
+		
+	}
+
+	/**
+	 * 上拉加载
+	 */
+	@Override
+	public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+		//该地址加载数据,昨天的新闻（用今天的data）。
+		up=true;
+		mQueue.add( new JsonObjectRequest(Method.GET,String.format(API.getBeforeUrl(),news.getDate() ) , null, this, null));
+		
+	}
+	/*---------------监听PullToRefreshScrollView上下拉---------------*/
+
+
+	
+	
+	/*------------------解析 新闻的Json字符串------------------*/
 	/**
 	 * 解析latest
 	 * @param latestObject
@@ -272,6 +267,6 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		
 		return topStories;
 	}
-	/*------------------初始化新闻数据------------------*/
+	/*------------------解析 新闻的Json字符串------------------*/
 
 }
