@@ -72,8 +72,6 @@ public class CustomListViewAdapter extends BaseAdapter{
 			}
 		}
 		
-		
-		
 		return convertView;
 	}
 	

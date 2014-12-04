@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sv_latest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="both" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.cx.project.zhihudaliy.custom.CustomSlide
+                android:id="@+id/custom_slide"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <com.cx.project.zhihudaliy.custom.CustomListViewForScrollView
+                android:id="@+id/lv_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#EEEEEE"
+                android:dividerHeight="5dp"
+                android:padding="10dp" />
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    
+
+</LinearLayout>
