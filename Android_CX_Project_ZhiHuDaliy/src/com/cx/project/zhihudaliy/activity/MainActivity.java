@@ -30,6 +30,7 @@ import com.cx.project.zhihudaliy.util.date.DateUtil;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class MainActivity extends Activity implements OnRefreshListener2<ScrollView>,Listener<JSONObject>{
 	private CustomTitle cTitle;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 	private CustomListViewAdapter adapter;
 	private boolean up ;
 
+	private SlidingMenu menu;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,11 +57,26 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		initLvNews();
 		initsvLatest(); //绑定它，是为了调节ScrollView 的初始位置
 		
+		initSlidingMenu();
+		
 		initLatestData();
 		
 	}
 
 	
+	private void initSlidingMenu() {
+		menu = new SlidingMenu(this);
+		menu.setMode(SlidingMenu.LEFT);
+		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+	
+		menu.setShadowWidth(10);
+		menu.setBehindOffset(100);
+		menu.setBehindWidth(200);
+		menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
+		menu.setMenu(R.layout.sliding_menu);
+	}
+
+
 	/**
 	 * 绑定 新闻列表
 	 */
@@ -203,7 +220,6 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		Story StoryTitle = new Story();
 		if(news.getStories()==null){ //第一次加载
 			StoryTitle.setTitle("今日热闻");
-			stories.add(StoryTitle);
 		}else{ //之前的新闻
 			
 			String date = news.getDate();
