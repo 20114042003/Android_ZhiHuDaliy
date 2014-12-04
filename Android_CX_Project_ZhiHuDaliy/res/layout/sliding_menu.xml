@@ -1,13 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/white"
+    android:layout_height="match_parent"  >
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/menu_avatar_bg" >
+
+        <ImageView
+            android:id="@+id/img_menu_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="34dp"
+            android:src="@drawable/menu_avatar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_menu_logo"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/img_menu_logo"
+            android:text="请登录"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#55000000"
+            android:orientation="horizontal"
+            android:padding="20dp" >
+
+            <Button
+                android:id="@+id/btn_menu_collcet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lucency"
+                android:drawableLeft="@drawable/menu_collect"
+                android:text="收藏"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_menu_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lucency"
+                android:drawableLeft="@drawable/menu_message"
+                android:text="消息"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_menu_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/lucency"
+                android:drawableLeft="@drawable/menu_collect"
+                android:text="设置"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
     
-    <TextView 
+    <ListView 
+        android:id="@+id/lv_thems"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content" 
-        android:text="nima" />
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/rl_head" />
+
     
 
-</LinearLayout>
+    <LinearLayout 
+        android:id="@+id/ll_bottom"  
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+          >
+        <Button android:id="@+id/btn_download" 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="离线"
+            android:background="@color/lucency"
+            android:drawableLeft="@drawable/menu_download"
+             />
+        <Button android:id="@+id/btn_night" 
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="夜间"
+            android:background="@color/lucency"
+            android:drawableLeft="@drawable/menu_night"
+             />
+        
+    </LinearLayout>
+
+</RelativeLayout>

@@ -9,6 +9,10 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.android.volley.Request.Method;
@@ -46,7 +50,10 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 	private CustomListViewAdapter adapter;
 	private boolean up ;
 
+	
+	//侧滑菜单相关
 	private SlidingMenu menu;
+	private ListView lvThems;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,17 +70,31 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		
 	}
 
-	
+	/**
+	 * 初始化侧滑菜单
+	 */
 	private void initSlidingMenu() {
+		
 		menu = new SlidingMenu(this);
 		menu.setMode(SlidingMenu.LEFT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-	
+		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setShadowWidth(10);
-		menu.setBehindOffset(100);
-		menu.setBehindWidth(200);
+		menu.setBehindOffset(50);
+		menu.setBehindWidth(350);
 		menu.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
 		menu.setMenu(R.layout.sliding_menu);
+		
+		lvThems = (ListView) findViewById(R.id.lv_thems);
+		
+		List<String> array = new ArrayList<String>();
+		for(int i = 0;i<15;i++){
+			array.add(String.format("item %s",i));
+		}
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array );
+		lvThems.setAdapter(adapter);
+		
+		
 	}
 
 
@@ -90,6 +111,14 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 	private void initTitle() {
 		cTitle =(CustomTitle) findViewById(R.id.custom_title);
 		cTitle.setTitle("首页");
+		
+		cTitle.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				menu.toggle();
+			}
+		});
 	}
 	
 	/**
@@ -201,7 +230,8 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		//解析 stories
 		news.setStories(parserStories(latestObject.getJSONArray("stories")));
 		//解析TopStories
-		news.setTopStories(parserTopStories(latestObject.getJSONArray("top_stories")));
+		news.setTopStories(TopStory.parse(latestObject.getJSONArray("top_stories")));
+//		news.setTopStories(parserTopStories(latestObject.getJSONArray("top_stories")));
 		
 	}
 
@@ -256,33 +286,33 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		return stories;
 	}
 	
-	/**
-	 * 解析 TopStories
-	 * @param jsonArray
-	 * @return
-	 * @throws JSONException 
-	 */
-	private List<TopStory> parserTopStories(JSONArray arrayTopStories) throws JSONException {
-		List<TopStory> topStories = null;
-		
-		// 封装TopStory
-		if (arrayTopStories != null && arrayTopStories.length() > 0) {
-			topStories = new ArrayList<TopStory>();
-			for (int i = 0 ; i < arrayTopStories.length() ; i++) {
-				JSONObject obj = arrayTopStories.getJSONObject(i);
-				TopStory topStory = new TopStory();
-				topStory.setGa_prefix(obj.getString("ga_prefix"));
-				topStory.setId(obj.getLong("id"));
-				topStory.setImage(obj.getString("image"));
-				topStory.setShare_url(obj.getString("share_url"));
-				topStory.setTitle(obj.getString("title"));
-				topStory.setType(obj.getInt("type"));
-				topStories.add(topStory);
-			}
-		}
-		
-		return topStories;
-	}
+//	/**
+//	 * 解析 TopStories
+//	 * @param jsonArray
+//	 * @return
+//	 * @throws JSONException 
+//	 */
+//	private List<TopStory> parserTopStories(JSONArray arrayTopStories) throws JSONException {
+//		List<TopStory> topStories = null;
+//		
+//		// 封装TopStory
+//		if (arrayTopStories != null && arrayTopStories.length() > 0) {
+//			topStories = new ArrayList<TopStory>();
+//			for (int i = 0 ; i < arrayTopStories.length() ; i++) {
+//				JSONObject obj = arrayTopStories.getJSONObject(i);
+//				TopStory topStory = new TopStory();
+//				topStory.setGa_prefix(obj.getString("ga_prefix"));
+//				topStory.setId(obj.getLong("id"));
+//				topStory.setImage(obj.getString("image"));
+//				topStory.setShare_url(obj.getString("share_url"));
+//				topStory.setTitle(obj.getString("title"));
+//				topStory.setType(obj.getInt("type"));
+//				topStories.add(topStory);
+//			}
+//		}
+//		
+//		return topStories;
+//	}
 	/*------------------解析 新闻的Json字符串------------------*/
 
 }

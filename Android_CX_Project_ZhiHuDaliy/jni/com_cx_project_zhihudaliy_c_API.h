@@ -39,6 +39,14 @@ JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getLatestUrl
 JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getBeforeUrl
   (JNIEnv *, jclass);
 
+/*
+ * Class:     com_cx_project_zhihudaliy_c_API
+ * Method:    getTheme
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getTheme
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

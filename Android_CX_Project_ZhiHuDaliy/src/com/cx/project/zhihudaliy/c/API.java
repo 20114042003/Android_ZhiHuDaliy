@@ -36,4 +36,12 @@ public class API {
 	 * @return
 	 */
 	public static native String getBeforeUrl();
+	
+	/**
+	 * 主题列表<br />
+	 * 返回的字符串需要使用String.format();方法格式化<br />
+	 * 例如：String.format(API.getTheme(), "11");
+	 * @return
+	 */
+	public static native String getTheme();
 }
