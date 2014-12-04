@@ -15,6 +15,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+/**
+ * 主页中显示新闻的适配器
+ * @author CxiaoX
+ *
+ * 2014年12月4日下午10:55:49
+ */
 public class CustomListViewAdapter extends BaseAdapter{
 	private Context context;
 	private News latest;
@@ -75,7 +81,7 @@ public class CustomListViewAdapter extends BaseAdapter{
 		return convertView;
 	}
 	
-	class ViewHolder {
+	private class ViewHolder {
 		public TextView txTitle;
 		public NetworkImageView imgThumb;
 	}

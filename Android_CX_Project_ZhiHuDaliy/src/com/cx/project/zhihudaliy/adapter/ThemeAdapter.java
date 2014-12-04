@@ -13,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+/**
+ * 侧滑菜单显示主题的ListView 使用的适配器
+ * @author CxiaoX
+ *
+ * 2014年12月4日下午10:54:55
+ */
 public class ThemeAdapter extends BaseAdapter{
 	private Context context;
 	private Theme theme;

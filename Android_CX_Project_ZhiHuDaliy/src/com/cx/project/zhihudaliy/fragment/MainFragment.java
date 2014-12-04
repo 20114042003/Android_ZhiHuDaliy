@@ -1,5 +1,8 @@
 package com.cx.project.zhihudaliy.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,6 +25,8 @@ import com.cx.project.zhihudaliy.custom.CustomListViewForScrollView;
 import com.cx.project.zhihudaliy.custom.CustomSlide;
 import com.cx.project.zhihudaliy.entity.News;
 import com.cx.project.zhihudaliy.entity.Story;
+import com.cx.project.zhihudaliy.util.date.DateStyle;
+import com.cx.project.zhihudaliy.util.date.DateUtil;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -127,7 +132,17 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 				
 				news.setDate(response.getString("date"));
 				//解析 stories,并添加到原来的news
-				news.getStories().addAll(Story.parse(news,response.getJSONArray("stories")));
+				
+				List<Story> stories =   new ArrayList<Story>();
+				//解析数据之前，先加标题进来。
+				Story StoryTitle = new Story();
+					String date = news.getDate();
+					String mmdd = DateUtil.StringToString(date, DateStyle.MM_DD_CN);
+					String week = DateUtil.getWeek(date).getChineseName();
+					StoryTitle.setTitle(String.format("%s  %s", mmdd,week));
+				stories.add(StoryTitle);
+				stories.addAll(Story.parse(response.getJSONArray("stories")));
+				news.getStories().addAll(stories);
 				
 				//更新新闻列表（新增 以前的新闻）
 				adapter.notifyDataSetChanged();
@@ -141,7 +156,6 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 		}
 	}
 	
-	/*------------------解析Json数据,并赋值------------------*/
 	
 	/*---------------监听PullToRefreshScrollView上下拉---------------*/
 	/**
