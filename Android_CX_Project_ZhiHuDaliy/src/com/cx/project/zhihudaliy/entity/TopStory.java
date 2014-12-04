@@ -22,7 +22,6 @@ public class TopStory extends AbstractStory {
 		this.image = image;
 	}
 	
-	
 	/**
 	 * 解析topStory ,使用该方法解析因为是静态了，一写一个方法就比较占用内存
 	 * @param arrayTopStories  topStory 的Json数组对象

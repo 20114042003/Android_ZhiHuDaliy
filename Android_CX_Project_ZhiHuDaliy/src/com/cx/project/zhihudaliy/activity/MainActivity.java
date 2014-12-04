@@ -22,12 +22,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cx.project.zhihudaliy.R;
 import com.cx.project.zhihudaliy.adapter.CustomListViewAdapter;
+import com.cx.project.zhihudaliy.adapter.ThemeAdapter;
 import com.cx.project.zhihudaliy.c.API;
 import com.cx.project.zhihudaliy.custom.CustomListViewForScrollView;
 import com.cx.project.zhihudaliy.custom.CustomSlide;
 import com.cx.project.zhihudaliy.custom.CustomTitle;
 import com.cx.project.zhihudaliy.entity.News;
 import com.cx.project.zhihudaliy.entity.Story;
+import com.cx.project.zhihudaliy.entity.Theme;
 import com.cx.project.zhihudaliy.entity.TopStory;
 import com.cx.project.zhihudaliy.util.date.DateStyle;
 import com.cx.project.zhihudaliy.util.date.DateUtil;
@@ -67,6 +69,26 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		initSlidingMenu();
 		
 		initLatestData();
+		initSlideingMenuData();
+		
+	}
+
+	
+	/**
+	 * 初始化侧滑菜单中的数据
+	 */
+	private void initSlideingMenuData() {
+		mQueue =Volley.newRequestQueue(this);
+		mQueue.add(new JsonObjectRequest(Method.GET, API.getThemesUrl(), null, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				Theme theme = Theme.parse(response);
+				
+				ThemeAdapter adapter = new ThemeAdapter(MainActivity.this, theme);
+				lvThems.setAdapter(adapter);
+			}
+		}, null));
 		
 	}
 
@@ -87,12 +109,12 @@ public class MainActivity extends Activity implements OnRefreshListener2<ScrollV
 		
 		lvThems = (ListView) findViewById(R.id.lv_thems);
 		
-		List<String> array = new ArrayList<String>();
-		for(int i = 0;i<15;i++){
-			array.add(String.format("item %s",i));
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array );
-		lvThems.setAdapter(adapter);
+//		List<String> array = new ArrayList<String>();
+//		for(int i = 0;i<15;i++){
+//			array.add(String.format("item %s",i));
+//		}
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,array );
+//		lvThems.setAdapter(adapter);
 		
 		
 	}
