@@ -7,6 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 侧滑菜单中的主题的项
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:32:36
+ */
 public class Others {
 	private int color;
 	private String image;

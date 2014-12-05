@@ -7,6 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 侧滑菜单中使用
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:33:08
+ */
 public class Subscribed {
 	
 	

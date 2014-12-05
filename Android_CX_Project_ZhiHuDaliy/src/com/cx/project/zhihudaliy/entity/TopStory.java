@@ -7,7 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * 首页新闻中的 幻灯新闻
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:29:19
+ */
 public class TopStory extends AbstractStory {
 	private String image;
 	

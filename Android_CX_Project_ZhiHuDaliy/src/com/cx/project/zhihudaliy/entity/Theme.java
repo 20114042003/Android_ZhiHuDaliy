@@ -5,6 +5,12 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 侧滑菜单使用
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:27:09
+ */
 public class Theme {
 	private int limit;
 	private List<Subscribed> subscribed;

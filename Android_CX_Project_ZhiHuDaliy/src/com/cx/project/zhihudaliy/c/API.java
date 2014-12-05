@@ -44,4 +44,20 @@ public class API {
 	 * @return
 	 */
 	public static native String getTheme();
+	
+	/**
+	 * 新闻详情
+	 * 返回的字符串需要使用String.format();方法格式化<br />
+	 * 例如：String.format(API.getNewsDetail(), "4353728");
+	 * @return
+	 */
+	public static native String getNewsDetail();
+	
+	/**
+	 * 新闻详情评论数目和点赞数
+	 * 返回的字符串需要使用String.format();方法格式化<br />
+	 * 例如：String.format(API.getNewsDetailExtra(), "4353728");
+	 * @return
+	 */
+	public static native String getNewsDetailExtra();
 }

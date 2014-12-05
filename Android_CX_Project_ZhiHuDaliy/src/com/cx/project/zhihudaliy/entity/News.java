@@ -9,6 +9,12 @@ import org.json.JSONObject;
 import com.cx.project.zhihudaliy.util.date.DateStyle;
 import com.cx.project.zhihudaliy.util.date.DateUtil;
 
+/**
+ * 首页中的新闻
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:28:49
+ */
 public class News {
 	private String date;
 	private List<Story> stories;

@@ -5,6 +5,12 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 主题类的新闻
+ * @author CxiaoX
+ *
+ * 2014年12月5日上午10:30:19
+ */
 public class ThemeNew {
 	private List<Story> stories;
 	private String description;

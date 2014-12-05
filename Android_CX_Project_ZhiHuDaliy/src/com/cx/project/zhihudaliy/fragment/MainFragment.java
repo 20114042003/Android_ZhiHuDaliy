@@ -6,11 +6,14 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ScrollView;
 
 import com.android.volley.RequestQueue;
@@ -19,6 +22,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cx.project.zhihudaliy.R;
+import com.cx.project.zhihudaliy.activity.ContentActivity;
 import com.cx.project.zhihudaliy.adapter.CustomListViewAdapter;
 import com.cx.project.zhihudaliy.c.API;
 import com.cx.project.zhihudaliy.custom.CustomListViewForScrollView;
@@ -32,7 +36,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 
 public class MainFragment extends Fragment implements Listener<JSONObject>,
-		OnRefreshListener2<ScrollView> {
+		OnRefreshListener2<ScrollView>,OnItemClickListener {
 
 	// Volley相关
 	private RequestQueue mQueue;
@@ -48,6 +52,10 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 	private CustomListViewForScrollView cLvNews;
 	private PullToRefreshScrollView svLaTest;
 	
+	/**
+	 * 静态方法 初始化MainFragment
+	 * @return
+	 */
 	public static MainFragment newInstance(){
 		MainFragment mf = new MainFragment();
 		Bundle args = new Bundle();
@@ -61,12 +69,16 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 
 		View layout = inflater.inflate(R.layout.fragment_main, container, false);
 
-		initView(layout);
+		initView(layout);  
 		initLatestData();
 
 		return layout;
 	}
 
+	/**
+	 * 初始化控件
+	 * @param layout
+	 */
 	private void initView(View layout) {
 
 		initSlide(layout); // 绑定幻灯
@@ -86,6 +98,7 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 	 */
 	private void initLvNews(View layout) {
 		cLvNews = (CustomListViewForScrollView) layout.findViewById(R.id.lv_news);
+		cLvNews.setOnItemClickListener(this);
 	}
 
 	/**
@@ -184,5 +197,17 @@ public class MainFragment extends Fragment implements Listener<JSONObject>,
 		
 	}
 	/*---------------监听PullToRefreshScrollView上下拉---------------*/
+
+	
+	/*---------------监听新闻列表的点击事件---------------*/
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+		Story story = news.getStories().get(position);
+		Intent intent = new Intent(getActivity(), ContentActivity.class);
+		intent.putExtra("id", story.getId());
+		startActivity(intent);
+		
+	}
+	/*---------------监听新闻列表的点击事件---------------*/
 
 }

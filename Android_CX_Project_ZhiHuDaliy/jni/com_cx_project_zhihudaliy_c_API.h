@@ -47,6 +47,22 @@ JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getBeforeUrl
 JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getTheme
   (JNIEnv *, jclass);
 
+/*
+ * Class:     com_cx_project_zhihudaliy_c_API
+ * Method:    getNewsDetail
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetail
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_cx_project_zhihudaliy_c_API
+ * Method:    getNewsDetailExtra
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetailExtra
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

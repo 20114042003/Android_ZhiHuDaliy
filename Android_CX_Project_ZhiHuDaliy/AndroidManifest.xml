@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.cx.project.zhihudaliy.activity.MainActivity"  />
+        <activity android:name="com.cx.project.zhihudaliy.activity.ContentActivity"  />
     </application>
 
 </manifest>
