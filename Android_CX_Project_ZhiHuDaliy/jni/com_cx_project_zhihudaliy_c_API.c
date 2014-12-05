@@ -26,4 +26,13 @@ JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getTheme
 	return (*env)->NewStringUTF(env,"http://news-at.zhihu.com/api/3/theme/%s");
 }
 
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetail
+  (JNIEnv *env, jclass thiz){
+	return (*env)->NewStringUTF(env,"http://news-at.zhihu.com/api/3/story/%s");
+}
+
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetailExtra
+  (JNIEnv *env, jclass thiz ){
+	return (*env)->NewStringUTF(env,"http://news-at.zhihu.com/api/3/story-extra/%s");
+}
 
