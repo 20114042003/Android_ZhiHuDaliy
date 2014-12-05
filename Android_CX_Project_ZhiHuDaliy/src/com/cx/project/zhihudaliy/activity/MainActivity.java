@@ -26,6 +26,12 @@ import com.cx.project.zhihudaliy.fragment.ContentFragment;
 import com.cx.project.zhihudaliy.fragment.MainFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+/**
+ * 首页
+ * @author CxiaoX
+ *
+ * 2014年12月5日下午3:03:07
+ */
 public class MainActivity extends FragmentActivity  implements OnItemClickListener {
 	private CustomTitle cTitle;
 	

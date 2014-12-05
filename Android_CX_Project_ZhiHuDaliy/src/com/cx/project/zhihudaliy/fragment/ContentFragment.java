@@ -2,11 +2,14 @@ package com.cx.project.zhihudaliy.fragment;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,13 +22,20 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.cx.project.zhihudaliy.R;
+import com.cx.project.zhihudaliy.activity.ContentActivity;
 import com.cx.project.zhihudaliy.c.API;
 import com.cx.project.zhihudaliy.cache.BitmapCache;
 import com.cx.project.zhihudaliy.custom.CustomListViewForScrollView;
 import com.cx.project.zhihudaliy.entity.Story;
 import com.cx.project.zhihudaliy.entity.ThemeNew;
 
-public class ContentFragment extends Fragment {
+/**
+ *  主题新闻列表界面
+ * @author CxiaoX
+ *
+ * 2014年12月5日下午3:02:38
+ */
+public class ContentFragment extends Fragment implements OnItemClickListener,Listener<JSONObject>{
 
 	// 控件相关
 	private TextView txDesc;
@@ -44,8 +54,14 @@ public class ContentFragment extends Fragment {
 	// 数据相关
 	private ThemeNew themeNew;
 
-	public static ContentFragment newInstance(String image, String description,
-			int themeId) {
+	/**
+	 * 静态方法 初始化ContentFragment
+	 * @param image  图片地址
+	 * @param description 描述
+	 * @param themeId 主体ID
+	 * @return
+	 */
+	public static ContentFragment newInstance(String image, String description,int themeId) {
 		ContentFragment cf = new ContentFragment();
 		Bundle args = new Bundle();
 		args.putString("image", image);
@@ -119,8 +135,8 @@ public class ContentFragment extends Fragment {
 	 * @param layout
 	 */
 	private void initlvTheme(View layout) {
-		lvTheme = (CustomListViewForScrollView) layout
-				.findViewById(R.id.lv_fragment_theme);
+		lvTheme = (CustomListViewForScrollView) layout.findViewById(R.id.lv_fragment_theme);
+		lvTheme.setOnItemClickListener(this);
 	}
 
 	/**
@@ -128,20 +144,49 @@ public class ContentFragment extends Fragment {
 	 */
 	private void initNewsData() {
 
-		mQueue.add(new JsonObjectRequest(Method.GET, String.format(
-				API.getTheme(), themeId), null, new Listener<JSONObject>() {
-
-			@Override
-			public void onResponse(JSONObject response) {
-				themeNew = ThemeNew.parse(response);
-				ThemeNewsAdapter adapter = new ThemeNewsAdapter();
-				lvTheme.setAdapter(adapter);
-
-			}
-		}, null));
+		mQueue.add(
+				new JsonObjectRequest(Method.GET, String.format(API.getTheme(), 
+						themeId), null, this, null));
 
 	}
+	
+	/*--------------网络请求--------------*/
+	@Override
+	public void onResponse(JSONObject response) {
+		themeNew = ThemeNew.parse(response);
+		initNewListData();
+		
+	}
+	/*--------------网络请求--------------*/
+	
 
+	/**
+	 * 初始化新闻列表的数据
+	 */
+	private void initNewListData() {
+		ThemeNewsAdapter adapter = new ThemeNewsAdapter();
+		lvTheme.setAdapter(adapter);
+	}
+	
+	
+	/*------------监听 主题新闻列表的点击事件（显示详情）------------*/
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
+		Story story = themeNew.getStories().get(position);
+		Intent intent = new Intent(getActivity(), ContentActivity.class);
+		intent.putExtra("id", story.getId());
+		startActivity(intent);
+	}
+	/*------------监听 主题新闻列表的点击事件（显示详情）------------*/
+	
+	
+	/**
+	 * 新闻列表的适配器
+	 * @author CxiaoX
+	 *
+	 * 2014年12月5日下午3:04:24
+	 */
 	class ThemeNewsAdapter extends BaseAdapter {
 
 		private ViewHolder viewHolder;
@@ -194,4 +239,15 @@ public class ContentFragment extends Fragment {
 
 	}
 
+
+
+
+
+	
+
+
+
+
+
+	
 }

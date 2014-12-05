@@ -8,8 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NewDetail {
-	private String body;
-	private String image_source; 
+	private String body;  //有的没有body
+	private String image_source;  //主页详情才有
 	private String title;  
 	private int editor_id;  
 	private String image;  
@@ -21,6 +21,12 @@ public class NewDetail {
 	private int type;  
 	private int id;  
 	private List<String> css;
+	
+	//一下属性主题详情才有
+	private String theme_name;
+	private long theme_id;
+	private String theme_image;
+	
 	public String getBody() {
 		return body;
 	}
@@ -100,23 +106,59 @@ public class NewDetail {
 		this.css = css;
 	}  
 	
+	
+	public String getTheme_name() {
+		return theme_name;
+	}
+	public void setTheme_name(String theme_name) {
+		this.theme_name = theme_name;
+	}
+	public long getTheme_id() {
+		return theme_id;
+	}
+	public void setTheme_id(long theme_id) {
+		this.theme_id = theme_id;
+	}
+	public String getTheme_image() {
+		return theme_image;
+	}
+	public void setTheme_image(String theme_image) {
+		this.theme_image = theme_image;
+	}
 	public static NewDetail parse(JSONObject obj){
 		NewDetail newDetail =null;
 		
 		try {
 			if(obj !=null){
 				newDetail = new NewDetail();
-				newDetail.setBody(obj.getString("body"));
-				newDetail.setImage_source(obj.getString("image_source"));
+				if(obj.has("body")){
+					newDetail.setBody(obj.getString("body"));
+				}
+				if(obj.has("image_source")){ //主题详情新闻没有
+					newDetail.setImage_source(obj.getString("image_source"));
+				}
 				newDetail.setTitle(obj.getString("title"));
 				newDetail.setEditor_id(obj.getInt("editor_id"));
-				newDetail.setImage(obj.getString("image"));
+				if(obj.has("image")){
+					newDetail.setImage(obj.getString("image"));
+				}
 				newDetail.setEditor_avatar(obj.getString("editor_avatar"));
 				newDetail.setShare_url(obj.getString("share_url"));
 				newDetail.setGa_prefix(obj.getString("ga_prefix"));
 				newDetail.setEditor_name(obj.getString("editor_name"));
 				newDetail.setType(obj.getInt("type"));
 				newDetail.setId(obj.getInt("id"));
+				
+				//一下主题详情新闻才有
+				if(obj.has("theme_name")){
+					newDetail.setTheme_name(obj.getString("theme_name"));
+				}
+				if(obj.has("theme_id")){
+					newDetail.setTheme_id(obj.getLong("theme_id"));
+				}
+				if(obj.has("theme_image")){
+					newDetail.setTheme_image(obj.getString("theme_image"));
+				}
 				
 				
 				

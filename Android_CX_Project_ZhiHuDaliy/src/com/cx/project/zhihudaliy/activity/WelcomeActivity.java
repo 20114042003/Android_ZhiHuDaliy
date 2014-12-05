@@ -22,6 +22,12 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
 
+/**
+ * 欢迎界面
+ * @author CxiaoX
+ *
+ * 2014年12月5日下午3:03:17
+ */
 public class WelcomeActivity extends Activity implements AnimationListener {
 	private RequestQueue mQueue;
 	private NetworkImageView imgStart;
