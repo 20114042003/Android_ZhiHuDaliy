@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#00A2ED"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+    
+     <com.cx.project.zhihudaliy.custom.ActionBarCustomBack
+                    android:id="@+id/custom_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                </com.cx.project.zhihudaliy.custom.ActionBarCustomBack>
+
+                <Button
+                    android:id="@+id/btn_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/news_share" />
+
+                <Button
+                    android:id="@+id/btn_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/news_collect" />
+
+                <Button
+                    android:id="@+id/btn_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/news_comment" />
+
+                <Button
+                    android:id="@+id/btn_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/news_vote" />
+
+</LinearLayout>

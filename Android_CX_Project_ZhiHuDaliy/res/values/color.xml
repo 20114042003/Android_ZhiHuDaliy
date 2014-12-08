@@ -2,5 +2,7 @@
 <resources>
     <color name="lucency">#00000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="actonbar_blue">#00A2ED</color>
+    <color name="actonbar_blue_click">#1FAEE8</color>
     
 </resources>

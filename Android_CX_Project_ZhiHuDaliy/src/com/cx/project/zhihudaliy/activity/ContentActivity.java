@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.cx.project.zhihudaliy.R;
 import com.cx.project.zhihudaliy.c.API;
 import com.cx.project.zhihudaliy.cache.BitmapCache;
+import com.cx.project.zhihudaliy.custom.ActionBarCustomBack;
 import com.cx.project.zhihudaliy.entity.NewDetail;
 
 /**
@@ -50,6 +51,7 @@ public class ContentActivity extends Activity implements OnClickListener,
 	private RelativeLayout rlHead; // 用于在没有头部数据的时候，隐藏头部。
 
 	private Button btnShare;
+	private ActionBarCustomBack customBack;
 
 	// Volley
 	private RequestQueue mQueue;
@@ -81,6 +83,10 @@ public class ContentActivity extends Activity implements OnClickListener,
 	 * 初始化控件
 	 */
 	private void initView() {
+		
+		customBack = (ActionBarCustomBack) findViewById(R.id.custom_back);
+		customBack.setOnClickListener(this);
+		
 
 		btnShare = (Button) findViewById(R.id.btn_share);
 		btnShare.setOnClickListener(this);
@@ -184,6 +190,9 @@ public class ContentActivity extends Activity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.custom_back:
+			finish();
+			break;
 		case R.id.btn_share:
 			showShare();
 
