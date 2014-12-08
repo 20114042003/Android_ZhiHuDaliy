@@ -12,6 +12,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+            
+            <LinearLayout 
+                android:layout_height="wrap_content"
+                android:background="#00A2ED"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent">
+
+                <Button 
+                    android:id="@+id/btn_share"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/news_share"
+                    />
+                <Button 
+                    android:id="@+id/btn_collect"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/news_collect"
+                    />
+                <Button 
+                    android:id="@+id/btn_comment"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/news_comment"
+                    />
+                <Button 
+                    android:id="@+id/btn_vote"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/news_vote"
+                    />
+                
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_head"
