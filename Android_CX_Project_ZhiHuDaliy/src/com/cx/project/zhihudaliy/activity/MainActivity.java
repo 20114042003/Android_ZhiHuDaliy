@@ -25,6 +25,7 @@ import com.cx.project.zhihudaliy.entity.Others;
 import com.cx.project.zhihudaliy.entity.Theme;
 import com.cx.project.zhihudaliy.fragment.ContentFragment;
 import com.cx.project.zhihudaliy.fragment.MainFragment;
+import com.cx.project.zhihudaliy.updata.UpdataTask;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /**
@@ -50,12 +51,26 @@ public class MainActivity extends FragmentActivity  implements OnItemClickListen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		
+		//检查更新
+		initUpdataCheck();
+		
 		initTitle();
 		initSlidingMenu();
 		initSlideingMenuData();
 		
 		showMainFragment();
+		
+		
 		 
+		
+	}
+
+	/**
+	 * 检查是否存在更新
+	 */
+	private void initUpdataCheck() {
+		new UpdataTask(this).execute();
 		
 	}
 
