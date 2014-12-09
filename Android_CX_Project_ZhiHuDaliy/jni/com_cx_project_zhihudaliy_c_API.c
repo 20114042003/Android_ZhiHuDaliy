@@ -36,3 +36,9 @@ JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetailExtr
 	return (*env)->NewStringUTF(env,"http://news-at.zhihu.com/api/3/story-extra/%s");
 }
 
+
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getUpdataUrl
+  (JNIEnv *env, jclass thiz){
+	return (*env)->NewStringUTF(env,"http://10.2.156.39:8080/apk/zhihudaliy/updata.xml");
+
+}

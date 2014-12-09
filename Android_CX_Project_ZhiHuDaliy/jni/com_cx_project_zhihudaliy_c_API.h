@@ -63,6 +63,14 @@ JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetail
 JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getNewsDetailExtra
   (JNIEnv *, jclass);
 
+/*
+ * Class:     com_cx_project_zhihudaliy_c_API
+ * Method:    getUpdataUrl
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_cx_project_zhihudaliy_c_API_getUpdataUrl
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

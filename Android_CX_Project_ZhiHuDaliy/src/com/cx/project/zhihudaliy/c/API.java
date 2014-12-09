@@ -60,4 +60,10 @@ public class API {
 	 * @return
 	 */
 	public static native String getNewsDetailExtra();
+	
+	/**
+	 * 更新信息的网络地址
+	 * @return
+	 */
+	public static native String getUpdataUrl();
 }
