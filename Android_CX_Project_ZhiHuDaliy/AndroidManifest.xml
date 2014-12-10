@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cx.project.zhihudaliy"
     android:versionCode="2"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -17,12 +17,15 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <!-- 读写SD卡的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.cx.project.zhihudaliy.application.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -38,8 +41,16 @@
             </intent-filter>
         </activity>
         <activity android:name="com.cx.project.zhihudaliy.activity.MainActivity" />
-        <activity android:name="com.cx.project.zhihudaliy.activity.ContentActivity" />
-        
+      
+        <!-- 新闻详情 -->
+             
+        <activity android:name="com.cx.project.zhihudaliy.activity.ContentActivity" >
+            <intent-filter >
+                 <action android:name="com.cx.project.zhihudaily.detail.push" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- Share 分享相关 -->
         <activity
             android:name="cn.sharesdk.framework.ShareSDKUIShell"
@@ -47,6 +58,29 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- 推送相关 -->
+        <activity
+            android:name="com.androidpn.client.NotificationDetailsActivity"
+            android:label="Notification Details" >
+        </activity>
+        <activity android:name="com.cx.project.zhihudaliy.activity.PushActivity" >
+            <intent-filter >
+                 <action android:name="com.cx.project.zhihudaily.push" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.androidpn.client.NotificationService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="NotificationService" 
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="org.androidpn.client.NotificationService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

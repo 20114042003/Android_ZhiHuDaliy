@@ -77,6 +77,8 @@ public class ContentActivity extends Activity implements OnClickListener,
 	 */
 	private void initParams() {
 		id = getIntent().getLongExtra("id", 0);
+		
+		Toast.makeText(this, String.valueOf(id), Toast.LENGTH_LONG).show();
 	}
 
 	/**

@@ -25,4 +25,8 @@ http://news-at.zhihu.com/api/3/story/4346351
 http://news-at.zhihu.com/api/3/story-extra/4346351
 
 
+更新地址（需自己开后台）：
+http://10.2.156.39:8080/apk/zhihudaliy/updata.xml
+
+
 
